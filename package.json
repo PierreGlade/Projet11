@@ -16,7 +16,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.21",
     "react-redux": "^9.1.0",
+    "react-router-dom": "^6.10.0",
     "swagger-ui-express": "^4.1.4",
+    "swagger-ui-react": "^5.15.1",
     "yamljs": "^0.3.0"
   },
   "scripts": {
