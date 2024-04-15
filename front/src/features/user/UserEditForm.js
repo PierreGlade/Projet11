@@ -9,8 +9,9 @@ function UserEditForm({ setEditToggle }) {
     const token = useSelector(getAuthToken)
     const user = useSelector(getUserData)
     const [userNames, setUserNames] = useState({
-        firstName: '',
-        lastName: '',
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
     })
 
     const canSave = Boolean(userNames.firstName) && Boolean(userNames.lastName)
@@ -26,7 +27,7 @@ function UserEditForm({ setEditToggle }) {
         })
     }
 
-    const handleEdit = async (token, userNames) => {
+    const handleEdit = async () => {
         const data = { token, userNames }
         if (canSave) {
             dispatch(updateUserData(data))
@@ -39,11 +40,19 @@ function UserEditForm({ setEditToggle }) {
             <div className="edit-wrapper">
                 <input
                     type="text"
+                    name="username"
+                    placeholder="Username"
+                    value={userNames.username}
+                    autoFocus
+                    onChange={(e) => handleChange(e)}
+                />
+                <input
+                    type="text"
                     name="firstName"
                     placeholder={user.firstName}
                     value={userNames.firstName}
-                    autoFocus
                     onChange={(e) => handleChange(e)}
+                    disabled 
                 />
                 <input
                     type="text"
@@ -51,19 +60,20 @@ function UserEditForm({ setEditToggle }) {
                     placeholder={user.lastName}
                     value={userNames.lastName}
                     onChange={(e) => handleChange(e)}
+                    disabled 
                 />
             </div>
             <div className="edit-wrapper">
                 <button
                     className="edit-content-button"
                     disabled={!canSave}
-                    onClick={() => handleEdit(token, userNames)}
+                    onClick={handleEdit}
                 >
                     Save
                 </button>
                 <button
                     className="edit-content-button"
-                    onClick={() => handleCancel(token, userNames)}
+                    onClick={handleCancel}
                 >
                     Cancel
                 </button>

@@ -1,16 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const initialState = {
+  const initialState = {
     email: '',
     firstName: '',
     lastName: '',
     id: '',
     createdAt: '',
     updatedAt: '',
-}
-
-export const fetchUserData = createAsyncThunk(
+} 
+  export const fetchUserData = createAsyncThunk(
     'user/getUserData',
     async (token) => {
         const res = await axios({
@@ -25,16 +24,37 @@ export const fetchUserData = createAsyncThunk(
 export const updateUserData = createAsyncThunk(
     'user/updateUserData',
     async (data) => {
-        const res = await axios({
-            method: 'put',
-            url: 'http://localhost:3001/api/v1/user/profile',
-            headers: { Authorization: `Bearer ${data.token}` },
-            data: data.userNames,
-        })
+        //const res = await axios({
+         //   method: 'put',
+         //   url: 'http://localhost:3001/api/v1/user/profile',
+        //    headers: { Authorization: `Bearer ${data.token}` },
+        //    data: data.userNames,
+     //   })
 
-        return res.data.body
+      //  return res.data.body
+      const res = await fetch("http://localhost:3001/api/v1/user/profile", {
+
+      method: "PUT",
+
+      headers: {
+
+        Authorization: `Bearer ${data.token}`,
+
+        "Content-Type": "application/json",
+
+      },
+
+      body: JSON.stringify({ username: "username" }),
+
+    });
+
+    const updateRequest = await res.json();
+
+    console.log(updateRequest)
+
+  return updateRequest.data.body
     }
-)
+) 
 
 export const userSlice = createSlice({
     name: 'user',
@@ -60,6 +80,7 @@ export const userSlice = createSlice({
                 state.updatedAt = payload.updatedAt
             })
             .addCase(updateUserData.fulfilled, (state, { payload }) => {
+                state.username = payload.username // Mettre à jour le nom d'utilisateur
                 state.firstName = payload.firstName
                 state.lastName = payload.lastName
                 state.updatedAt = payload.updatedAt

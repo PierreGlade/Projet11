@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import Logo from '../assets/argentBankLogo.png'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,8 +7,13 @@ import { emptyUserData, getUserData } from '../features/user/userSlice'
 
 function Header() {
     const dispatch = useDispatch()
-    const firstName = useSelector(getUserData).firstName
     const connected = useSelector(getAuthConnected)
+    const userData = useSelector(getUserData)
+    const [username, setUsername] = useState(userData.username)
+
+    useEffect(() => {
+        setUsername(userData.username)
+    }, [userData.username])
 
     const handleLogOut = () => {
         dispatch(logout())
@@ -36,7 +41,7 @@ function Header() {
                     <>
                         <NavLink className="main-nav-item" to="/profile">
                             <i className="fa fa-user-circle"></i>
-                            {firstName}
+                            {username}
                         </NavLink>
                         <NavLink
                             className="main-nav-item"
