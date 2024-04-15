@@ -1,24 +1,32 @@
-import React, { useState, useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import Logo from '../assets/argentBankLogo.png'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAuthConnected, logout } from '../features/auth/authSlice'
-import { emptyUserData, getUserData } from '../features/user/userSlice'
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import Logo from '../assets/argentBankLogo.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuthConnected, logout } from '../features/auth/authSlice';
+import { emptyUserData, getUserData } from '../features/user/userSlice';
 
 function Header() {
-    const dispatch = useDispatch()
-    const connected = useSelector(getAuthConnected)
-    const userData = useSelector(getUserData)
-    const [username, setUsername] = useState(userData.username)
+    const dispatch = useDispatch();
+    const connected = useSelector(getAuthConnected);
+    const userData = useSelector(getUserData);
+    const [username, setUsername] = useState(userData.username);
 
     useEffect(() => {
-        setUsername(userData.username)
-    }, [userData.username])
+        setUsername(userData.username);
+    }, [userData.username]);
 
     const handleLogOut = () => {
-        dispatch(logout())
-        dispatch(emptyUserData())
-    }
+        dispatch(logout());
+        dispatch(emptyUserData());
+    };
+    const [userName, setUserName] = useState(userData.userName)
+
+
+    useEffect(() => {
+
+        setUserName(userData.userName)
+
+    }, [userData.userName])
 
     return (
         <nav className="main-nav">
@@ -41,7 +49,7 @@ function Header() {
                     <>
                         <NavLink className="main-nav-item" to="/profile">
                             <i className="fa fa-user-circle"></i>
-                            {username}
+                            {userName}
                         </NavLink>
                         <NavLink
                             className="main-nav-item"
@@ -58,7 +66,7 @@ function Header() {
                 )}
             </div>
         </nav>
-    )
+    );
 }
 
-export default Header
+export default Header;

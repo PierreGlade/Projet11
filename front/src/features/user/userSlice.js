@@ -5,6 +5,7 @@ import axios from 'axios'
     email: '',
     firstName: '',
     lastName: '',
+    userName: '',
     id: '',
     createdAt: '',
     updatedAt: '',
@@ -24,14 +25,7 @@ import axios from 'axios'
 export const updateUserData = createAsyncThunk(
     'user/updateUserData',
     async (data) => {
-        //const res = await axios({
-         //   method: 'put',
-         //   url: 'http://localhost:3001/api/v1/user/profile',
-        //    headers: { Authorization: `Bearer ${data.token}` },
-        //    data: data.userNames,
-     //   })
-
-      //  return res.data.body
+  
       const res = await fetch("http://localhost:3001/api/v1/user/profile", {
 
       method: "PUT",
@@ -44,7 +38,7 @@ export const updateUserData = createAsyncThunk(
 
       },
 
-      body: JSON.stringify({ username: "username" }),
+      body: JSON.stringify({ userName: data.userNames.username }),
 
     });
 
@@ -52,7 +46,7 @@ export const updateUserData = createAsyncThunk(
 
     console.log(updateRequest)
 
-  return updateRequest.data.body
+  return updateRequest.body
     }
 ) 
 
@@ -64,6 +58,7 @@ export const userSlice = createSlice({
             state.email = ''
             state.firstName = ''
             state.lastName = ''
+            state.userName = ''
             state.id = ''
             state.createdAt = ''
             state.updatedAt = ''
@@ -75,6 +70,7 @@ export const userSlice = createSlice({
                 state.email = payload.email
                 state.firstName = payload.firstName
                 state.lastName = payload.lastName
+                state.userName = payload.userName
                 state.id = payload.id
                 state.createdAt = payload.createdAt
                 state.updatedAt = payload.updatedAt
@@ -85,6 +81,7 @@ export const userSlice = createSlice({
                 state.lastName = payload.lastName
                 state.updatedAt = payload.updatedAt
             })
+           
     },
 })
 

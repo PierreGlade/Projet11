@@ -1,9 +1,9 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
   title: Bank Argent API documentation
   description: Contains all available API endpoints in this codebase
-  version: "1.0.0"
-  termsOfService: "http://swagger.io/terms/"
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
 host: localhost:3001
 basePath: /api/v1
 schemes:
@@ -21,17 +21,17 @@ paths:
           description: Login Payload
           required: true
           schema:
-            $ref: "#/definitions/Login"
+            $ref: '#/definitions/Login'
       produces:
         - application/json
       responses:
-        "200":
+        '200':
           description: Login Successfully
           schema:
-            $ref: "#/definitions/LoginResponse"
-        "400":
+            $ref: '#/definitions/LoginResponse'
+        '400':
           description: Invalid Fields
-        "500":
+        '500':
           description: Internal Server Error
   /user/signup:
     post:
@@ -45,17 +45,17 @@ paths:
           description: Signup Payload
           required: true
           schema:
-            $ref: "#/definitions/User"
+            $ref: '#/definitions/User'
       produces:
         - application/json
       responses:
-        "200":
+        '200':
           description: Signup Successfully
           schema:
-            $ref: "#/definitions/ApiResponse"
-        "400":
+            $ref: '#/definitions/ApiResponse'
+        '400':
           description: Invalid Fields
-        "500":
+        '500':
           description: Internal Server Error
   /user/profile:
     post:
@@ -66,15 +66,15 @@ paths:
       summary: User Profile API
       description: API for fetching a user profile
       #produces:
-      # - application/json
+       # - application/json
       responses:
-        "200":
+        '200':
           description: User profile retrieved successully
           schema:
-            $ref: "#/definitions/ApiResponse"
-        "400":
+            $ref: '#/definitions/ApiResponse'
+        '400':
           description: Invalid Fields
-        "500":
+        '500':
           description: Internal Server Error
     put:
       security:
@@ -89,17 +89,17 @@ paths:
           description: Update user profile attributes
           required: true
           schema:
-            $ref: "#/definitions/UserProfile"
+            $ref: '#/definitions/UserProfile'
       produces:
         - application/json
       responses:
-        "200":
+        '200':
           description: User profile retrieved successully
           schema:
-            $ref: "#/definitions/ApiResponse"
-        "400":
+            $ref: '#/definitions/ApiResponse'
+        '400':
           description: Invalid Fields
-        "500":
+        '500':
           description: Internal Server Error
   /user/{accountId}:
     get:
@@ -118,13 +118,13 @@ paths:
           required: true
           description: id of account to display
       responses:
-        "200":
+        '200':
           description: User account retrieved succesfully
           schema:
-            $ref: "#/definitions/UserAccount"
-        "400":
+            $ref: '#/definitions/UserAccount'
+        '400':
           description: Invalid Fields
-        "500":
+        '500':
           description: Internal Server Error
   /user/{accountId}/{transactionId}:
     get:
@@ -148,13 +148,13 @@ paths:
           required: true
           description: id of transaction to display
       responses:
-        "200":
+        '200':
           description: User transactions retrieved succesfully
           schema:
-            $ref: "#/definitions/UserTransactions"
-        "400":
+            $ref: '#/definitions/UserTransactions'
+        '400':
           description: Invalid Fields
-        "500":
+        '500':
           description: Internal Server Error
     put:
       security:
@@ -179,17 +179,17 @@ paths:
           description: Update user transaction attributes
           required: true
           schema:
-            $ref: "#/definitions/UserTransactionsAttributes"
+            $ref: '#/definitions/UserTransactionsAttributes'
       produces:
         - application/json
       responses:
-        "200":
+        '200':
           description: User transaction attributes updated successfully
           schema:
-            $ref: "#/definitions/UserTransactions"
-        "400":
+            $ref: '#/definitions/UserTransactions'
+        '400':
           description: Invalid Fields
-        "500":
+        '500':
           description: Internal Server Error
 securityDefinitions:
   Bearer:
@@ -255,7 +255,7 @@ definitions:
         type: string
       body:
         type: array
-        items:
+        items: 
           type: object
           properties:
             id:
@@ -270,7 +270,7 @@ definitions:
               type: integer
   UserTransactions:
     type: object
-    properties:
+    properties: 
       status:
         type: integer
       message:
@@ -290,14 +290,15 @@ definitions:
             type: integer
           transactionType:
             type: string
-          category:
+          category: 
             type: string
           note:
             type: string
   UserTransactionsAttributes:
-    type: object
-    properties:
-      category:
-        type: string
-      note:
-        type: string
+      type: object
+      properties:
+        category:
+          type: string
+        note:
+          type: string
+  

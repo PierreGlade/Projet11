@@ -14,7 +14,7 @@ function UserEditForm({ setEditToggle }) {
         lastName: user.lastName,
     })
 
-    const canSave = Boolean(userNames.firstName) && Boolean(userNames.lastName)
+    const canSave = Boolean(userNames.firstName) && Boolean(userNames.lastName) && Boolean(userNames.username)
 
     const handleCancel = () => {
         setEditToggle(false)
@@ -45,6 +45,7 @@ function UserEditForm({ setEditToggle }) {
                     value={userNames.username}
                     autoFocus
                     onChange={(e) => handleChange(e)}
+                    
                 />
                 <input
                     type="text"
@@ -66,8 +67,9 @@ function UserEditForm({ setEditToggle }) {
             <div className="edit-wrapper">
                 <button
                     className="edit-content-button"
-                    disabled={!canSave}
+                   disabled={!canSave}
                     onClick={handleEdit}
+                    
                 >
                     Save
                 </button>
